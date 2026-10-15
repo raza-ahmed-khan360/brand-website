@@ -201,7 +201,7 @@
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: clamp(2.1rem, 4.5vw + 0.5rem, 3.5rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.04em;
@@ -484,7 +484,7 @@
 }
 
 .section-title {
-  font-size: 2.6rem;
+  font-size: clamp(1.75rem, 3.5vw + 0.3rem, 2.6rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -938,7 +938,7 @@
 }
 
 .story-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 3.2vw + 0.3rem, 2.5rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-primary);
@@ -1175,7 +1175,7 @@
 }
 
 .tier-price {
-  font-size: 2.75rem;
+  font-size: clamp(2.2rem, 3.5vw + 0.3rem, 2.75rem);
   font-weight: 800;
   letter-spacing: -0.04em;
   color: var(--text-primary);
@@ -1274,7 +1274,7 @@
 }
 
 .about-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 3.2vw + 0.3rem, 2.5rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-primary);
@@ -1574,7 +1574,7 @@
 }
 
 .cta-title {
-  font-size: 2.8rem;
+  font-size: clamp(1.85rem, 3.5vw + 0.3rem, 2.8rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-primary);
@@ -1827,78 +1827,366 @@
 }
 
 /* --------------------------------------------------------------------------
-   RESPONSIVE BREAKPOINTS (Mobile & Tablet Optimization)
+   RESPONSIVE BREAKPOINTS (Mobile, Tablet & Small Screen Optimization)
    -------------------------------------------------------------------------- */
+
+/* Tablet & Medium Screens (<= 1024px) */
 @media (max-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr;
     gap: var(--space-10);
   }
+
+  .hero-description {
+    max-width: 100%;
+  }
+
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
   }
+
   .industry-playbook-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .chasm-comparison-grid {
     grid-template-columns: 1fr;
     gap: var(--space-6);
   }
-  .chasm-comparison-grid {
-    grid-template-columns: 1fr;
-  }
+
   .protocol-steps-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
   }
+
   .pricing-cards-grid {
     grid-template-columns: 1fr;
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
+    gap: var(--space-6);
   }
+
   .about-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-10);
   }
+
   .testimonials-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-6);
   }
+
   .cta-clay-container {
     grid-template-columns: 1fr;
     padding: var(--space-8);
+    gap: var(--space-8);
   }
+
   .footer-top-grid {
     grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
   }
 }
 
-@media (max-width: 768px) {
-  .nav-links, .status-indicator {
+/* Tablets & Mobile Filter Scrolling (<= 860px) */
+@media (max-width: 860px) {
+  /* Scrollable Industry Pills on Mobile */
+  .industry-tabs-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    padding: 6px 4px 14px 4px;
+    margin-bottom: var(--space-6);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 8px;
+  }
+
+  .industry-tabs-nav::-webkit-scrollbar {
     display: none;
   }
+
+  .industry-tab-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+
+  /* Scrollable Portfolio Filter on Mobile */
+  .portfolio-filter-bar {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    padding: 4px 4px 12px 4px;
+    margin-bottom: var(--space-8);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 8px;
+  }
+
+  .portfolio-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile Devices (<= 768px) */
+@media (max-width: 768px) {
+  .header-wrapper {
+    top: 8px;
+    padding: 0 10px;
+    margin-bottom: var(--space-4);
+  }
+
+  .clay-navbar {
+    padding: 8px 16px;
+  }
+
+  .nav-links, 
+  .status-indicator {
+    display: none;
+  }
+
   .mobile-menu-btn {
     display: flex;
   }
-  .hero-title {
-    font-size: 2.5rem;
+
+  .mobile-nav-drawer {
+    top: 66px;
+    left: 10px;
+    right: 10px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding: var(--space-5);
   }
+
   .services-grid {
     grid-template-columns: 1fr;
   }
+
   .portfolio-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-6);
   }
-  .portfolio-metrics-tray {
+
+  .industry-playbook-display {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .story-container {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .protocol-steps-grid {
     grid-template-columns: 1fr;
     gap: var(--space-3);
   }
-  .protocol-steps-grid {
-    grid-template-columns: 1fr;
-  }
-  .footer-top-grid {
-    grid-template-columns: 1fr;
-  }
+
   .guarantee-banner {
     flex-direction: column;
     text-align: center;
+    padding: var(--space-6);
+    gap: var(--space-4);
   }
+
   .guarantee-content {
     flex-direction: column;
+    text-align: center;
+  }
+
+  .about-stats-panel {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .cta-clay-container {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-3);
+  }
+
+  .faq-trigger {
+    padding: var(--space-5) var(--space-5);
+    font-size: 0.98rem;
+  }
+
+  .faq-answer-body {
+    padding: 0 var(--space-5);
+  }
+
+  .faq-item.active .faq-answer-body {
+    padding-bottom: var(--space-5);
+  }
+}
+
+/* Small Smart Phones (<= 640px) */
+@media (max-width: 640px) {
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .hero-cta-group .clay-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-micro-guarantee {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-console {
+    padding: var(--space-5);
+  }
+
+  .console-pod-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .trust-tray {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .trust-badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .trust-badge-item {
+    padding: var(--space-3);
+  }
+
+  .client-logos-row {
+    gap: 14px 18px;
+  }
+
+  .client-logo-pill {
+    font-size: 0.82rem;
+  }
+
+  .service-card {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .portfolio-card-header {
+    padding: var(--space-6) var(--space-5) var(--space-3) var(--space-5);
+  }
+
+  .portfolio-metrics-tray {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    margin: 0 var(--space-5) var(--space-4) var(--space-5);
+    padding: var(--space-3);
+  }
+
+  .portfolio-deliverables-row {
+    padding: 0 var(--space-5) var(--space-5) var(--space-5);
+  }
+
+  .pricing-toggle-wrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pricing-toggle-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .pricing-card {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .about-principles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid-2x2 {
+    gap: 10px;
+  }
+
+  .stat-val {
+    font-size: 1.65rem;
+  }
+
+  .pod-locations-well {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .cta-form-card {
+    padding: var(--space-5);
+  }
+
+  .toast-notice {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border-radius: var(--radius-md);
+    justify-content: center;
+    font-size: 0.84rem;
+    padding: 12px 18px;
+  }
+
+  .modal-clay-dialog {
+    max-width: 95vw;
+    padding: var(--space-6) var(--space-4);
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+}
+
+/* Extra Small Phones (<= 380px) */
+@media (max-width: 380px) {
+  .brand-tagline {
+    display: none;
+  }
+
+  .brand-name {
+    font-size: 1.05rem;
+  }
+
+  .brand-icon-clay {
+    width: 34px;
+    height: 34px;
+  }
+
+  .trust-badges-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .console-metrics-row {
+    grid-template-columns: 1fr;
   }
 }

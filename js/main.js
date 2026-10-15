@@ -25,6 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
       });
     });
+
+    // Close when tapping outside the drawer
+    document.addEventListener('click', (e) => {
+      if (mobileNavDrawer.classList.contains('active') && 
+          !mobileNavDrawer.contains(e.target) && 
+          !mobileMenuBtn.contains(e.target)) {
+        mobileNavDrawer.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
   }
 
   // -------------------------------------------------------------------------
