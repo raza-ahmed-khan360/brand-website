@@ -148,8 +148,7 @@ h2{font-size:clamp(46px,5vw,72px);line-height:1.08;letter-spacing:-.06em;font-we
 .footer-logo{display:block;background:white;width:260px;padding:4px}
 .footer-top>div{display:flex;gap:35px}
 .footer-top>div a{font-size:13px;text-decoration:none;color:#d0d8e3}
-.footer-bottom{display:flex;justify-content:space-between;gap:25px;padding:22px 0 30px;font:10px var(--mono);color:#94a4b8}
-.footer-bottom a{text-underline-offset:2px}
+.footer-bottom{padding:22px 0 30px;font:10px var(--mono);color:#94a4b8}
 .image-dialog{border:0;padding:18px;background:#fff;max-width:min(92vw,1100px);max-height:90vh;box-shadow:0 20px 80px #0007}
 .image-dialog::backdrop{background:#041225dc}
 .image-dialog img{max-height:calc(90vh - 85px);max-width:100%;margin:auto;object-fit:contain}
