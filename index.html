@@ -102,9 +102,13 @@
           <p class="section-index">05 / START A PROJECT</p>
           <h2>Let's make it<br><em>matter</em><span>.</span></h2>
           <p>Have a project in mind? Tell us a little about it and choose the service that fits. If you came from a package, we've filled it in for you.</p>
-          <p class="form-preview-note">Form preview only — submissions are not connected yet.</p>
+          <p class="form-preview-note" id="form-availability">Tell us about your project and we’ll get back to you by email.</p>
         </div>
-        <form class="inquiry-form" id="inquiry-form" aria-label="Project enquiry form preview">
+        <form class="inquiry-form" id="inquiry-form" action="https://api.web3forms.com/submit" method="POST" aria-label="Project enquiry form">
+          <input type="hidden" name="access_key" id="web3forms-access-key" value="03f440f6-8379-46ae-be25-ee4df12f4d4e">
+          <input type="hidden" name="subject" value="New project enquiry — American Website Developer">
+          <input type="hidden" name="from_name" value="American Website Developer">
+          <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true" class="botcheck">
           <div class="form-row">
             <div class="form-field"><label for="inquiry-name">Your name</label><input id="inquiry-name" name="name" type="text" placeholder="Your full name" autocomplete="name" required></div>
             <div class="form-field"><label for="inquiry-email">Email address</label><input id="inquiry-email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required></div>
@@ -113,14 +117,14 @@
             <div class="form-field"><label for="inquiry-service">Service</label><select id="inquiry-service" name="service"><option value="">Select a service</option><option value="website">Website development</option><option value="logo">Logo design</option><option value="branding">Branding</option><option value="seo">Search engine optimization</option><option value="revamp">Website revamp</option><option value="video">Video production</option><option value="mobile">Mobile application</option><option value="social">Social media management</option></select></div>
             <div class="form-field"><label for="inquiry-package">Package <span>(optional)</span></label><input id="inquiry-package" name="package" type="text" placeholder="Not sure yet? Leave blank"></div>
           </div>
-          <div class="form-field"><label for="inquiry-brief">A few words about your project</label><textarea id="inquiry-brief" name="brief" rows="5" placeholder="What are you looking to create?"></textarea></div>
-          <div class="form-end"><button class="button light-button" type="submit" disabled>Send enquiry <span aria-hidden="true">↗</span></button><span>Preview only · sending disabled</span></div>
+          <div class="form-field"><label for="inquiry-brief">A few words about your project</label><textarea id="inquiry-brief" name="message" rows="5" placeholder="What are you looking to create?" required></textarea></div>
+          <div class="form-end"><button class="button light-button" type="submit">Send enquiry <span aria-hidden="true">↗</span></button><span class="form-status" id="form-status" role="status" aria-live="polite">Ready to send</span></div>
         </form>
       </div>
     </section>
 
   </main>
-  <footer class="footer"><div class="container footer-top"><a class="footer-logo" href="#top"><img src="logo-reference.png" alt="American Website Developer"></a><div><a href="#approach">Services</a><a href="#portfolio">Portfolio</a><a href="#pricing">Pricing</a><a href="#process">Process</a><a href="#contact">Contact</a></div></div><div class="container footer-bottom"><span>© <span id="year"></span> American Website Developer</span></div></footer>
+  <footer class="footer"><div class="container footer-top"><a class="footer-logo" href="#top"><img src="logo-reference.png" alt="American Website Developer"></a><div><a href="#approach">Services</a><a href="#portfolio">Portfolio</a><a href="#pricing">Pricing</a><a href="#process">Process</a><a href="#contact">Contact</a></div></div><div class="container footer-bottom"><span>© <span id="year"></span> American Website Developer</span><a href="mailto:Info@americanwebsitedeveloper.com">Info@americanwebsitedeveloper.com</a></div></footer>
   <dialog id="image-dialog" class="image-dialog" aria-label="Portfolio image"><button type="button" class="dialog-close" aria-label="Close image">×</button><img alt=""><p></p></dialog>
 </body>
 </html>

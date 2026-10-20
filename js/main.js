@@ -142,7 +142,43 @@ pricingGrid.addEventListener('click', event => {
   document.querySelector('#inquiry-service').value = link.dataset.inquiryService;
   document.querySelector('#inquiry-package').value = link.dataset.inquiryPackage;
 });
-document.querySelector('#inquiry-form')?.addEventListener('submit', event => event.preventDefault());
+const inquiryForm = document.querySelector('#inquiry-form');
+const formAccessKey = document.querySelector('#web3forms-access-key');
+const formSubmit = inquiryForm?.querySelector('button[type="submit"]');
+const formStatus = document.querySelector('#form-status');
+if (inquiryForm && formAccessKey && formSubmit && formStatus) {
+  const formEnabled = Boolean(formAccessKey.value.trim());
+  formSubmit.disabled = !formEnabled;
+  if (formEnabled) {
+    document.querySelector('#form-availability').textContent = 'Tell us about your project and we’ll get back to you by email.';
+    formStatus.textContent = 'Ready to send';
+  }
+  inquiryForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!formAccessKey.value.trim()) return;
+
+    formSubmit.disabled = true;
+    formStatus.textContent = 'Sending your enquiry…';
+    delete formStatus.dataset.state;
+    try {
+      const response = await fetch(inquiryForm.action, {
+        method: 'POST',
+        body: new FormData(inquiryForm),
+        headers: { Accept: 'application/json' }
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error('Submission failed');
+      inquiryForm.reset();
+      formStatus.textContent = 'Thanks — your enquiry has been sent.';
+      formStatus.dataset.state = 'success';
+    } catch {
+      formStatus.textContent = 'Could not send right now. Please try again.';
+      formStatus.dataset.state = 'error';
+    } finally {
+      formSubmit.disabled = false;
+    }
+  });
+}
 
 const heroSlider = document.querySelector('#hero-slider');
 const heroSlides = [...document.querySelectorAll('.hero-slide')];
