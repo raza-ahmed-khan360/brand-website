@@ -144,6 +144,51 @@ pricingGrid.addEventListener('click', event => {
 });
 document.querySelector('#inquiry-form')?.addEventListener('submit', event => event.preventDefault());
 
+const heroSlider = document.querySelector('#hero-slider');
+const heroSlides = [...document.querySelectorAll('.hero-slide')];
+const heroDots = [...document.querySelectorAll('.slider-dot')];
+let activeHeroSlide = 0;
+function showHeroSlide(index) {
+  activeHeroSlide = (index + heroSlides.length) % heroSlides.length;
+  heroSlides.forEach((slide, slideIndex) => {
+    const active = slideIndex === activeHeroSlide;
+    slide.classList.toggle('is-active', active);
+    slide.setAttribute('aria-hidden', String(!active));
+  });
+  heroDots.forEach((dot, dotIndex) => {
+    const active = dotIndex === activeHeroSlide;
+    dot.classList.toggle('is-active', active);
+    if (active) dot.setAttribute('aria-current', 'true');
+    else dot.removeAttribute('aria-current');
+  });
+  document.querySelector('#hero-slide-count').textContent = `${String(activeHeroSlide + 1).padStart(2, '0')} / ${String(heroSlides.length).padStart(2, '0')}`;
+}
+heroSlider?.addEventListener('click', event => {
+  const button = event.target.closest('button[data-slide], button[data-slide-direction]');
+  if (!button) return;
+  if (button.dataset.slide !== undefined) showHeroSlide(Number(button.dataset.slide));
+  else showHeroSlide(activeHeroSlide + Number(button.dataset.slideDirection));
+});
+
+// Keep the reading-position indicator lightweight and off the scroll hot path.
+const scrollProgress = document.querySelector('.scroll-progress');
+let scrollFramePending = false;
+function updateScrollProgress() {
+  const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollableHeight > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollableHeight)) : 0;
+  scrollProgress.style.transform = `scaleX(${progress})`;
+  scrollFramePending = false;
+}
+if (scrollProgress) {
+  updateScrollProgress();
+  window.addEventListener('scroll', () => {
+    if (scrollFramePending) return;
+    scrollFramePending = true;
+    requestAnimationFrame(updateScrollProgress);
+  }, { passive: true });
+  window.addEventListener('resize', updateScrollProgress, { passive: true });
+}
+
 const menuButton = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.nav-links');
 menuButton?.addEventListener('click', () => {
