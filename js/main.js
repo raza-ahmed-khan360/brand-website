@@ -124,7 +124,7 @@ function renderPricing(id) {
   if (!category) return;
   document.querySelector('#pricing-heading').textContent = category.label;
   document.querySelector('#pricing-count').textContent = String(category.cards.length).padStart(2, '0') + ' PACKAGES';
-  pricingGrid.innerHTML = category.cards.map(([name, price, oldPrice, features], index) => `<article class="price-card"><div class="price-card-top"><span class="price-card-index">PACKAGE / ${String(index + 1).padStart(2, '0')}</span><span class="price-card-index">${escapeHTML(category.label.toUpperCase())}</span></div><h3>${escapeHTML(name)}</h3><div class="price-line"><strong>${formatPrice(price)}</strong><del>${formatPrice(oldPrice)}</del></div><ul>${features.map(feature => `<li>${escapeHTML(feature)}</li>`).join('')}</ul><a class="price-card-more" href="https://brandversestudios.com/packages" target="_blank" rel="noopener noreferrer">FULL DETAILS AT SOURCE ↗</a></article>`).join('');
+  pricingGrid.innerHTML = category.cards.map(([name, price, oldPrice, features], index) => `<article class="price-card"><div class="price-card-top"><span class="price-card-index">PACKAGE / ${String(index + 1).padStart(2, '0')}</span><span class="price-card-index">${escapeHTML(category.label.toUpperCase())}</span></div><h3>${escapeHTML(name)}</h3><div class="price-line"><strong>${formatPrice(price)}</strong><del>${formatPrice(oldPrice)}</del></div><ul>${features.map(feature => `<li>${escapeHTML(feature)}</li>`).join('')}</ul><a class="price-card-more" href="#contact" data-inquiry-service="${category.id}" data-inquiry-package="${escapeHTML(name)}">ASK ABOUT THIS PACKAGE ↗</a></article>`).join('');
   registerReveals(pricingGrid.querySelectorAll('.price-card'));
   pricingTabs.querySelectorAll('.price-tab').forEach(tab => {
     const selected = tab.dataset.package === id;
@@ -136,6 +136,13 @@ pricingTabs.addEventListener('click', event => {
   const tab = event.target.closest('.price-tab');
   if (tab) renderPricing(tab.dataset.package);
 });
+pricingGrid.addEventListener('click', event => {
+  const link = event.target.closest('[data-inquiry-package]');
+  if (!link) return;
+  document.querySelector('#inquiry-service').value = link.dataset.inquiryService;
+  document.querySelector('#inquiry-package').value = link.dataset.inquiryPackage;
+});
+document.querySelector('#inquiry-form')?.addEventListener('submit', event => event.preventDefault());
 
 const menuButton = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.nav-links');

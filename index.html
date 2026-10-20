@@ -20,7 +20,7 @@
       <a class="brand" href="#top" aria-label="American Website Developer home"><img src="logo-reference.png" alt="American Website Developer"></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu"><span></span><span></span></button>
       <div class="nav-links" id="site-menu">
-        <a href="#approach">What we do</a><a href="#portfolio">Portfolio</a><a href="#pricing">Pricing</a><a href="#process">Process</a>
+        <a href="#approach">What we do</a><a href="#portfolio">Portfolio</a><a href="#pricing">Pricing</a><a href="#process">Process</a><a href="#contact">Contact</a>
         <a class="nav-action" href="#pricing">Explore packages <span aria-hidden="true">↗</span></a>
       </div>
     </nav>
@@ -59,7 +59,7 @@
 
     <section class="portfolio" id="portfolio">
       <div class="container">
-        <div class="section-intro"><p class="section-index">02 / PORTFOLIO</p><div><h2>See the thinking<br><em>take shape.</em></h2><p>Browse the project imagery by discipline. The gallery below is sourced from the <a href="https://brandversestudios.com/" target="_blank" rel="noopener noreferrer">Brand Verse Studios portfolio</a> provided as the reference for this site.</p></div></div>
+        <div class="section-intro"><p class="section-index">02 / PORTFOLIO</p><div><h2>See the thinking<br><em>take shape.</em></h2><p>Browse the project imagery by discipline. The gallery below is sourced from the Brand Verse Studios portfolio provided as the reference for this site.</p></div></div>
         <div class="gallery-tabs" role="tablist" aria-label="Portfolio categories">
           <button type="button" class="gallery-tab active" data-gallery="web" aria-selected="true">Websites <span>06</span></button>
           <button type="button" class="gallery-tab" data-gallery="logo" aria-selected="false">Logo design <span>06</span></button>
@@ -76,7 +76,7 @@
 
     <section class="pricing" id="pricing">
       <div class="container">
-        <div class="section-intro pricing-intro"><p class="section-index">03 / PACKAGES</p><div><h2>Clear options.<br><em>Room to grow.</em></h2><p>Explore the published package catalog from <a href="https://brandversestudios.com/packages" target="_blank" rel="noopener noreferrer">Brand Verse Studios</a>. These are the published prices and key inclusions; confirm the full scope before purchase.</p></div></div>
+        <div class="section-intro pricing-intro"><p class="section-index">03 / PACKAGES</p><div><h2>Clear options.<br><em>Room to grow.</em></h2><p>Explore the package options below. Prices and inclusions are based on the Brand Verse Studios reference; final scope can be discussed in your enquiry.</p></div></div>
         <div id="pricing-tabs" class="pricing-tabs" role="tablist" aria-label="Package categories"></div>
         <div class="pricing-meta"><span id="pricing-heading">Logo design</span><span id="pricing-count">06 PACKAGES</span></div>
         <div id="pricing-grid" class="pricing-grid" aria-live="polite"></div>
@@ -87,8 +87,31 @@
       <div class="container process-inner"><div><p class="section-index">04 / THE PROCESS</p><h2>Simple on purpose.<br><em>Thorough by design.</em></h2></div><div class="process-list"><div><span>01</span><h3>Understand</h3><p>We start with the brief, the audience and what success needs to look like.</p></div><div><span>02</span><h3>Create</h3><p>Concepts become a coherent design system, then a working experience.</p></div><div><span>03</span><h3>Refine</h3><p>Feedback shapes the details before final delivery and launch.</p></div></div></div>
     </section>
 
+    <section class="closing" id="contact">
+      <div class="container closing-inner">
+        <div class="closing-copy">
+          <p class="section-index">05 / START A PROJECT</p>
+          <h2>Let's make it<br><em>matter</em><span>.</span></h2>
+          <p>Have a project in mind? Tell us a little about it and choose the service that fits. If you came from a package, we've filled it in for you.</p>
+          <p class="form-preview-note">Form preview only — submissions are not connected yet.</p>
+        </div>
+        <form class="inquiry-form" id="inquiry-form" aria-label="Project enquiry form preview">
+          <div class="form-row">
+            <div class="form-field"><label for="inquiry-name">Your name</label><input id="inquiry-name" name="name" type="text" placeholder="Your full name" autocomplete="name" required></div>
+            <div class="form-field"><label for="inquiry-email">Email address</label><input id="inquiry-email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label for="inquiry-service">Service</label><select id="inquiry-service" name="service"><option value="">Select a service</option><option value="website">Website development</option><option value="logo">Logo design</option><option value="branding">Branding</option><option value="seo">Search engine optimization</option><option value="revamp">Website revamp</option><option value="video">Video production</option><option value="mobile">Mobile application</option><option value="social">Social media management</option></select></div>
+            <div class="form-field"><label for="inquiry-package">Package <span>(optional)</span></label><input id="inquiry-package" name="package" type="text" placeholder="Not sure yet? Leave blank"></div>
+          </div>
+          <div class="form-field"><label for="inquiry-brief">A few words about your project</label><textarea id="inquiry-brief" name="brief" rows="5" placeholder="What are you looking to create?"></textarea></div>
+          <div class="form-end"><button class="button light-button" type="submit" disabled>Send enquiry <span aria-hidden="true">↗</span></button><span>Preview only · sending disabled</span></div>
+        </form>
+      </div>
+    </section>
+
   </main>
-  <footer class="footer"><div class="container footer-top"><a class="footer-logo" href="#top"><img src="logo-reference.png" alt="American Website Developer"></a><div><a href="#approach">Services</a><a href="#portfolio">Portfolio</a><a href="#pricing">Pricing</a><a href="#process">Process</a></div></div><div class="container footer-bottom"><span>© <span id="year"></span> American Website Developer</span><span>Reference portfolio and packages: <a href="https://brandversestudios.com/" target="_blank" rel="noopener noreferrer">Brand Verse Studios</a></span></div></footer>
+  <footer class="footer"><div class="container footer-top"><a class="footer-logo" href="#top"><img src="logo-reference.png" alt="American Website Developer"></a><div><a href="#approach">Services</a><a href="#portfolio">Portfolio</a><a href="#pricing">Pricing</a><a href="#process">Process</a><a href="#contact">Contact</a></div></div><div class="container footer-bottom"><span>© <span id="year"></span> American Website Developer</span><span>Reference portfolio and packages: Brand Verse Studios</span></div></footer>
   <dialog id="image-dialog" class="image-dialog" aria-label="Portfolio image"><button type="button" class="dialog-close" aria-label="Close image">×</button><img alt=""><p></p></dialog>
 </body>
 </html>
