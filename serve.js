@@ -39,7 +39,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`\n======================================================`);
-  console.log(` TANGIBLE EXECUTION STUDIO PREVIEW SERVER RUNNING`);
+ console.log(` AMERICAN WEBSITE DEVELOPER PREVIEW SERVER RUNNING`);
   console.log(` URL: http://localhost:${PORT}`);
   console.log(` Directory: ${__dirname}`);
   console.log(` Press Ctrl+C to stop.`);

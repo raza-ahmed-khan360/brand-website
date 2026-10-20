@@ -1,183 +1,159 @@
-/**
- * TANGIBLE DIGITAL AGENCY - INTERACTIVE SCRIPTS
- * Clean, lightweight, user-friendly micro-interactions,
- * portfolio filtering, FAQ accordions, and consultation modal.
- */
+const portfolioCategories = [
+  { id: 'web', label: 'Website development', count: 6 },
+  { id: 'logo', label: 'Logo design', count: 6 },
+  { id: 'branding', label: 'Branding', count: 6 },
+  { id: 'motion', label: 'Motion graphics', count: 6 },
+  { id: 'app', label: 'App development', count: 6 }
+];
 
-document.addEventListener('DOMContentLoaded', () => {
-  // -------------------------------------------------------------------------
-  // 1. Mobile Menu Toggle
-  // -------------------------------------------------------------------------
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+// Package names, published prices and feature summaries were checked against
+// https://brandversestudios.com/packages in October 2026.
+const packages = [
+  { id: 'logo', label: 'Logo design', cards: [
+    ['Basic Logo', 49, 99, ['3 initial logo concepts', '2 rounds of revisions', 'PNG, JPG and SVG files', 'Black and white version', 'Color palette suggestions', '1 week delivery']],
+    ['Premium Logo', 125, 249, ['5 initial logo concepts', 'Unlimited revisions', 'All file formats', 'Horizontal, vertical and icon variations', 'Brand guidelines', 'Business card design']],
+    ['Enterprise Logo', 249, 499, ['8 initial logo concepts', 'Unlimited revisions', 'Complete logo system', 'Full brand identity package', 'Comprehensive brand guidelines', 'Social media kit']],
+    ['3D Logo Package', 499, 749, ['3 unique 3D concepts', 'Lighting effects and VFX', 'Fully rendered logo', 'Multiple viewing angles', '3 dedicated designers', '72-hour turnaround']],
+    ['MascotPro Package', 399, 649, ['2 mascot concepts', 'Hand-drawn sketch', 'Unlimited revisions', 'Presentation mockup', 'AI, EPS, PNG, JPEG and PDF files', '24–48 hour turnaround']],
+    ['BrandMaster Package', 999, 1499, ['Unlimited original concepts', '5-page informative website', 'Stationery design', 'Brand book', '500 business cards', 'Social media designs']]
+  ]},
+  { id: 'website', label: 'Website development', cards: [
+    ['Starter Package', 249, 399, ['3-page website', 'Custom layout design', 'Contact or query form', '1 banner design', '2 stock photos', 'Favicon and source files']],
+    ['Professional Package', 499, 799, ['5-page website', 'Custom layout design', 'Contact or query form', '3 banner designs', '5 stock photos', 'Google-friendly sitemap']],
+    ['Business Package', 999, 1499, ['Up to 10 unique pages', 'CMS or admin panel', '5+ stock photos and banners', 'Social media integration', 'Google-friendly sitemap', 'Interactive design']],
+    ['Ecommerce Package', 649, 999, ['Custom ecommerce website', 'Up to 200 products', 'CMS or admin integration', 'Mobile responsive', 'Shopping cart and payment gateway', 'Order management']],
+    ['Premium Package', 1799, 2499, ['Up to 15 unique pages', 'Interactive WordPress or PHP design', 'Mobile responsive', 'Up to 10 banner designs', 'Content management system', 'Newsletter signup']],
+    ['Elite Package', 3499, 6499, ['Up to 20 unique pages', 'Dynamic interactive design', 'WordPress or PHP development', 'Mobile responsive', 'CMS and custom forms', 'Optional booking and payments']]
+  ]},
+  { id: 'branding', label: 'Branding', cards: [
+    ['Brand Essentials', 699, 899, ['Logo design', 'Brand color palette', 'Typography selection', 'Basic brand guidelines', 'Business card design', '2 rounds of revisions']],
+    ['Complete Branding', 1899, 2499, ['Complete logo system', 'Full brand identity', 'Comprehensive guidelines', 'Stationery and email signature', 'Social media templates', 'Photography direction']],
+    ['Brand Transformation', 4499, 5999, ['Rebranding strategy', 'Complete identity system', 'Guidelines and print materials', 'Digital brand assets', 'Photography and video direction', 'Brand workshops']],
+    ['Brand Expansion', 5499, 7999, ['Multi-market strategy', 'Sub-brand identities', 'Packaging for up to 5 items', 'Extended guidelines', 'Social templates', 'Marketing collateral']],
+    ['Enterprise Branding', 6999, 8999, ['Enterprise brand architecture', 'Master and sub-brand systems', 'Corporate identity suite', 'Digital and social templates', 'Internal communication kit', 'Messaging and tone system']],
+    ['Global Branding', 10999, 14999, ['Full brand audit and research', 'Global strategy', 'Multi-language identity', 'International rollout plan', 'Packaging systems', 'Digital ecosystem design']]
+  ]},
+  { id: 'seo', label: 'Search engine optimization', cards: [
+    ['SEO Starter', 399, 499, ['On-page optimization', 'Research for 20 keywords', 'Meta tags', 'Analytics and Search Console setup', 'Basic technical SEO', 'Monthly report']],
+    ['SEO Growth', 999, 1299, ['Complete SEO audit', 'Research for 50+ keywords', 'On-page and off-page work', 'Technical fixes', 'Content optimization', 'Local SEO']],
+    ['SEO Enterprise', 2299, 2999, ['Comprehensive SEO audit', 'Strategy for 100+ keywords', 'Technical overhaul', 'Content strategy', 'Advanced link building', 'Competitor analysis']]
+  ]},
+  { id: 'revamp', label: 'Website revamp', cards: [
+    ['Website Refresh', 749, 999, ['Homepage plus 3-page refresh', 'Mobile optimization', 'Performance improvements', 'Content updates', '1 revision round', '2–3 week delivery']],
+    ['Complete Revamp', 2299, 2999, ['Complete redesign', 'Responsive design', 'Performance optimization', 'SEO improvements', 'Content restructuring', '3 months of support']],
+    ['Enterprise Revamp', 5499, 6999, ['Full website redesign', 'Custom web application', 'Advanced integrations', 'Complete SEO overhaul', 'User experience optimization', '6 months of support']]
+  ]},
+  { id: 'video', label: 'Video production', cards: [
+    ['Video Starter', 599, 799, ['1 video up to 60 seconds', 'Basic editing', 'Music and sound effects', '1 revision round', 'HD delivery', '2–3 week delivery']],
+    ['Video Professional', 1899, 2499, ['2–3 videos up to 2 minutes each', 'Professional editing', 'Motion graphics', 'Color grading', 'Voiceover', 'Multiple formats']],
+    ['Video Enterprise', 4499, 5999, ['5+ videos', 'Cinematic production', 'Advanced motion graphics', 'Custom music', 'Multi-language versions', 'Complete video strategy']]
+  ]},
+  { id: 'mobile', label: 'Mobile application', cards: [
+    ['App Basic', 2299, 2999, ['iOS or Android app', 'Basic features', 'User authentication', 'UI/UX design', 'App store submission', '2 months of support']],
+    ['App Professional', 5999, 7999, ['iOS and Android apps', 'Advanced features', 'Custom UI/UX', 'Backend development', 'API integration', 'Push notifications']],
+    ['App Enterprise', 14999, 19999, ['iOS and Android apps', 'Advanced integrations', 'Custom backend', 'Enterprise security', 'Custom admin panel', '6 months of support']]
+  ]},
+  { id: 'social', label: 'Social media management', cards: [
+    ['Social Starter', 299, 399, ['3 platforms', '8 posts per month', 'Basic content creation', 'Community management', 'Monthly report', '1-month commitment']],
+    ['Social Growth', 799, 999, ['5 platforms', '20 posts per month', 'Professional content', 'Video content', 'Influencer outreach', 'Paid ad management']],
+    ['Social Enterprise', 1899, 2499, ['All platforms', 'Unlimited posts', 'Premium content', 'Video production', 'Influencer partnerships', 'Complete ad campaigns']]
+  ]}
+];
 
-  if (mobileMenuBtn && mobileNavDrawer) {
-    mobileMenuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-      mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
-      mobileNavDrawer.classList.toggle('active');
-    });
+const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+const formatPrice = value => '$' + value.toLocaleString('en-US');
 
-    // Close on navigation link click
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileNavDrawer.classList.remove('active');
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+const galleryGrid = document.querySelector('#gallery-grid');
+const galleryTabs = document.querySelectorAll('.gallery-tab');
+const dialog = document.querySelector('#image-dialog');
+const motionAllowed = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+const revealObserver = motionAllowed && 'IntersectionObserver' in window
+  ? new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       });
-    });
+    }, { threshold: 0.08, rootMargin: '0px 0px 40px 0px' })
+  : null;
 
-    // Close when tapping outside
-    document.addEventListener('click', (e) => {
-      if (mobileNavDrawer.classList.contains('active') && 
-          !mobileNavDrawer.contains(e.target) && 
-          !mobileMenuBtn.contains(e.target)) {
-        mobileNavDrawer.classList.remove('active');
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
-
-  // -------------------------------------------------------------------------
-  // 2. Portfolio Category Filtering
-  // -------------------------------------------------------------------------
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const portfolioCards = document.querySelectorAll('.portfolio-card');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filterValue = btn.getAttribute('data-filter');
-
-      portfolioCards.forEach(card => {
-        const cardCategory = card.getAttribute('data-category');
-        if (filterValue === 'all' || cardCategory === filterValue) {
-          card.style.display = 'flex';
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, 20);
-        } else {
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(10px)';
-          setTimeout(() => {
-            card.style.display = 'none';
-          }, 180);
-        }
-      });
-    });
+function registerReveals(elements) {
+  if (!revealObserver) return;
+  Array.from(elements).forEach((element, index) => {
+    element.classList.add('reveal');
+    element.style.setProperty('--reveal-delay', `${Math.min(index % 3, 2) * 85}ms`);
+    revealObserver.observe(element);
   });
+}
 
-  // -------------------------------------------------------------------------
-  // 3. FAQ Accordion Interaction
-  // -------------------------------------------------------------------------
-  const faqItems = document.querySelectorAll('.faq-item');
-
-  faqItems.forEach(item => {
-    const trigger = item.querySelector('.faq-trigger');
-    if (trigger) {
-      trigger.addEventListener('click', () => {
-        const isOpen = item.classList.contains('active');
-
-        // Close all other accordions
-        faqItems.forEach(otherItem => {
-          otherItem.classList.remove('active');
-          const otherTrigger = otherItem.querySelector('.faq-trigger');
-          if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
-        });
-
-        // Toggle current item
-        if (!isOpen) {
-          item.classList.add('active');
-          trigger.setAttribute('aria-expanded', 'true');
-        }
-      });
-    }
+function renderGallery(id) {
+  const category = portfolioCategories.find(item => item.id === id);
+  if (!category || !galleryGrid) return;
+  galleryGrid.innerHTML = Array.from({ length: category.count }, (_, index) => {
+    const number = index + 1;
+    const file = `assets/portfolio/${id}-${number}.webp`;
+    return `<article class="gallery-item"><button type="button" class="gallery-image" data-image="${file}" data-title="${escapeHTML(category.label)} / ${String(number).padStart(2, '0')}" aria-label="Open ${escapeHTML(category.label)} image ${number}"><img src="${file}" alt="${escapeHTML(category.label)} portfolio reference image ${number}" loading="lazy"></button><div class="gallery-caption"><span>${escapeHTML(category.label)}</span><span>${String(number).padStart(2, '0')} / 06</span></div></article>`;
+  }).join('');
+  registerReveals(galleryGrid.querySelectorAll('.gallery-item'));
+  galleryTabs.forEach(tab => {
+    const selected = tab.dataset.gallery === id;
+    tab.classList.toggle('active', selected);
+    tab.setAttribute('aria-selected', String(selected));
   });
+}
 
-  // -------------------------------------------------------------------------
-  // 4. Consultation Modal & Form Handling
-  // -------------------------------------------------------------------------
-  const modalOverlay = document.getElementById('auditModal');
-  const openModalBtns = document.querySelectorAll('.open-audit-modal');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-  const auditModalForm = document.getElementById('auditModalForm');
-  const toastNotice = document.getElementById('toastNotice');
-
-  function openModal() {
-    if (modalOverlay) {
-      modalOverlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  function closeModal() {
-    if (modalOverlay) {
-      modalOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  }
-
-  openModalBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal();
-    });
-  });
-
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', closeModal);
-  }
-
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) {
-        closeModal();
-      }
-    });
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('active')) {
-      closeModal();
-    }
-  });
-
-  // Toast Notification
-  function showToast(message) {
-    if (toastNotice) {
-      const toastText = toastNotice.querySelector('.toast-text');
-      if (toastText) toastText.textContent = message;
-      toastNotice.classList.add('show');
-      setTimeout(() => {
-        toastNotice.classList.remove('show');
-      }, 4000);
-    }
-  }
-
-  // Modal Form Submit
-  if (auditModalForm) {
-    auditModalForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const companyInput = document.getElementById('modalCompany');
-      const companyName = companyInput && companyInput.value ? companyInput.value : 'your company';
-      closeModal();
-      showToast(`Thank you! Consultation requested for ${companyName}. We will be in touch shortly.`);
-      auditModalForm.reset();
-    });
-  }
-
-  // Inline CTA Form Submit
-  const inlineCtaForm = document.getElementById('inlineCtaForm');
-  if (inlineCtaForm) {
-    inlineCtaForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const nameInput = document.getElementById('ctaName');
-      const nameVal = nameInput && nameInput.value ? nameInput.value : 'there';
-      showToast(`Thank you, ${nameVal}! We will contact you within 4 business hours.`);
-      inlineCtaForm.reset();
-    });
-  }
+galleryTabs.forEach(tab => tab.addEventListener('click', () => renderGallery(tab.dataset.gallery)));
+galleryGrid?.addEventListener('click', event => {
+  const button = event.target.closest('button[data-image]');
+  if (!button || !dialog) return;
+  dialog.querySelector('img').src = button.dataset.image;
+  dialog.querySelector('img').alt = button.querySelector('img').alt;
+  dialog.querySelector('p').textContent = button.dataset.title + ' · Brand Verse Studios portfolio reference';
+  dialog.showModal();
+  document.body.classList.add('dialog-open');
 });
+dialog?.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+dialog?.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+dialog?.addEventListener('close', () => document.body.classList.remove('dialog-open'));
+
+const pricingTabs = document.querySelector('#pricing-tabs');
+const pricingGrid = document.querySelector('#pricing-grid');
+pricingTabs.innerHTML = packages.map(item => `<button type="button" class="price-tab" data-package="${item.id}" aria-selected="false">${escapeHTML(item.label)}</button>`).join('');
+function renderPricing(id) {
+  const category = packages.find(item => item.id === id);
+  if (!category) return;
+  document.querySelector('#pricing-heading').textContent = category.label;
+  document.querySelector('#pricing-count').textContent = String(category.cards.length).padStart(2, '0') + ' PACKAGES';
+  pricingGrid.innerHTML = category.cards.map(([name, price, oldPrice, features], index) => `<article class="price-card"><div class="price-card-top"><span class="price-card-index">PACKAGE / ${String(index + 1).padStart(2, '0')}</span><span class="price-card-index">${escapeHTML(category.label.toUpperCase())}</span></div><h3>${escapeHTML(name)}</h3><div class="price-line"><strong>${formatPrice(price)}</strong><del>${formatPrice(oldPrice)}</del></div><ul>${features.map(feature => `<li>${escapeHTML(feature)}</li>`).join('')}</ul><a class="price-card-more" href="https://brandversestudios.com/packages" target="_blank" rel="noopener noreferrer">FULL DETAILS AT SOURCE ↗</a></article>`).join('');
+  registerReveals(pricingGrid.querySelectorAll('.price-card'));
+  pricingTabs.querySelectorAll('.price-tab').forEach(tab => {
+    const selected = tab.dataset.package === id;
+    tab.classList.toggle('active', selected);
+    tab.setAttribute('aria-selected', String(selected));
+  });
+}
+pricingTabs.addEventListener('click', event => {
+  const tab = event.target.closest('.price-tab');
+  if (tab) renderPricing(tab.dataset.package);
+});
+
+const menuButton = document.querySelector('.menu-toggle');
+const menu = document.querySelector('.nav-links');
+menuButton?.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  menuButton.setAttribute('aria-expanded', String(open));
+  menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+  menu.classList.remove('open');
+  menuButton.setAttribute('aria-expanded', 'false');
+}));
+
+document.querySelector('#year').textContent = new Date().getFullYear();
+if (revealObserver) {
+  document.documentElement.classList.add('motion-ready');
+  registerReveals(document.querySelectorAll('.statement-inner > *, .services > div, .section-intro > *, .interlude .container > *, .pricing-meta, .process-inner > *, .process-list > div, .closing .container > *'));
+  requestAnimationFrame(() => document.documentElement.classList.add('intro-visible'));
+}
+renderGallery('web');
+renderPricing('logo');

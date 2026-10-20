@@ -1,11 +1,11 @@
 {
   "name": "brand-website",
   "version": "1.0.0",
-  "description": "Tactile Claymorphism Landing Page for Full-Service Digital Growth and Engineering Agency",
+  "description": "American Website Developer portfolio and digital-services landing page",
   "main": "index.html",
   "scripts": {
     "start": "node serve.js"
   },
-  "author": "Tangible Execution LLC",
+  "author": "American Website Developer",
   "license": "ISC"
 }
