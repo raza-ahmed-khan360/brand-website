@@ -1188,12 +1188,13 @@ body {
 
   /* Header & Navigation Bar */
   .nav {
-    height: 80px !important;
+    min-height: 84px !important;
+    height: auto !important;
     gap: 12px !important;
-    padding: 0 !important;
+    padding: 6px 0 !important;
   }
   .brand {
-    width: clamp(235px, 68vw, 280px) !important;
+    width: clamp(245px, 70vw, 290px) !important;
     max-width: calc(100% - 56px) !important;
     display: flex !important;
     align-items: center !important;
@@ -1201,9 +1202,7 @@ body {
   .brand img {
     width: 100% !important;
     height: auto !important;
-    max-height: 58px !important;
     display: block !important;
-    object-fit: contain !important;
   }
 
   /* Mobile Hamburger Toggle Button */
@@ -1794,21 +1793,25 @@ body {
     display: none !important;
   }
   .nav {
-    height: 76px !important;
+    min-height: 78px !important;
+    height: auto !important;
+    padding: 4px 0 !important;
   }
   .nav-links {
     top: 104px !important;
     padding: 10px 16px 20px !important;
   }
   .brand {
-    width: clamp(205px, 64vw, 245px) !important;
+    width: clamp(215px, 66vw, 255px) !important;
     max-width: calc(100% - 52px) !important;
   }
   .brand img {
-    max-height: 52px !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
   }
   .footer-logo {
-    width: 210px !important;
+    width: 230px !important;
   }
   h1 {
     font-size: clamp(30px, 8vw, 42px) !important;
