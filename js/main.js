@@ -230,15 +230,25 @@ if (scrollProgress) {
 
 const menuButton = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.nav-links');
-menuButton?.addEventListener('click', () => {
+menuButton?.addEventListener('click', event => {
+  event.stopPropagation();
   const open = menu.classList.toggle('open');
   menuButton.setAttribute('aria-expanded', String(open));
   menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
 });
 menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
   menu.classList.remove('open');
-  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton?.setAttribute('aria-expanded', 'false');
 }));
+document.addEventListener('click', event => {
+  if (menu && menu.classList.contains('open')) {
+    if (!menu.contains(event.target) && !menuButton?.contains(event.target)) {
+      menu.classList.remove('open');
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menuButton?.setAttribute('aria-label', 'Open menu');
+    }
+  }
+});
 
 const yearEl = document.querySelector('#year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 if (revealObserver) {
