@@ -244,7 +244,7 @@ menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () =>
 const yearEl = document.querySelector('#year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 if (revealObserver) {
   document.documentElement.classList.add('motion-ready');
-  registerReveals(document.querySelectorAll('.statement-inner > *, .services > div, .section-intro > *, .interlude .container > *, .pricing-meta, .process-inner > *, .process-list > div, .closing .container > *'));
+  registerReveals(document.querySelectorAll('.statement-inner > *, .services > div, .section-intro > *, .interlude .container > *, .pricing-meta, .process-inner > *, .process-list > div, .closing .container > *, .service-deep-card, .standard-card, .team-card, .faq-row, .gallery-item, .contact-item, .price-card'));
   requestAnimationFrame(() => document.documentElement.classList.add('intro-visible'));
 }
 if (galleryGrid) renderGallery('web');
