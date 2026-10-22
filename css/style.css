@@ -16,9 +16,9 @@ img{display:block;max-width:100%}
 .topline .container{height:31px;display:flex;align-items:center;justify-content:space-between;font:10px var(--mono);letter-spacing:.13em}
 .topline a{text-decoration:none;transition:color .2s ease}
 .topline a:hover,.topline a:focus-visible{color:#fff}
-.nav{height:100px;display:flex;align-items:center;justify-content:space-between;gap:36px}
-.brand{width:275px;display:flex;align-items:center;flex:none}
-.brand img{width:100%;height:auto;display:block}
+.nav{height:110px;display:flex;align-items:center;justify-content:space-between;gap:36px}
+.brand{width:350px;display:flex;align-items:center;flex:none}
+.brand img{width:100%;height:auto;display:block;margin-bottom:-18px}
 .nav-links{display:flex;align-items:center;gap:28px}
 .nav-links>a:not(.nav-action){font-size:13.5px;font-weight:600;text-decoration:none;color:var(--navy);letter-spacing:-.01em;position:relative;padding:10px 0;display:inline-flex;align-items:center;line-height:1.2;transition:color .2s ease}
 .nav-links>a:not(.nav-action):hover{color:var(--blue)}
@@ -177,7 +177,7 @@ h2{font-size:clamp(46px,5vw,72px);line-height:1.08;letter-spacing:-.06em;font-we
 .light-button:disabled{opacity:.62;cursor:not-allowed;transform:none}
 .footer{background:#fff;color:var(--navy)}
 .footer-top{padding:60px 0;display:flex;justify-content:space-between;align-items:start;border-bottom:1px solid #d8dce0}
-.footer-logo{display:block;width:285px}
+.footer-logo{display:block;width:330px}
 .footer-top>div{display:flex;gap:35px}
 .footer-top>div a{font-size:13px;text-decoration:none;color:var(--navy)}
 .footer-top>div a:hover{color:var(--blue)}
@@ -868,7 +868,7 @@ body {
    ========================================================================== */
 
 .nav {
-  height: 104px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -876,7 +876,7 @@ body {
 }
 
 .brand {
-  width: 275px;
+  width: 350px;
   display: flex;
   align-items: center;
   flex: none;
@@ -885,6 +885,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
+  margin-bottom: -18px;
 }
 
 .nav-links {
@@ -982,13 +983,18 @@ body {
 /* Responsive Navbar Adjustments (Prevent crowding on laptops) */
 @media (min-width: 961px) and (max-width: 1220px) {
   .nav {
+    min-height: 104px;
+    height: auto;
     gap: 20px;
   }
   .brand {
-    width: 235px;
+    width: 300px;
+  }
+  .brand img {
+    margin-bottom: -14px;
   }
   .nav-links {
-    gap: 18px;
+    gap: 16px;
   }
   .nav-links > a:not(.nav-action) {
     font-size: 12.5px;
@@ -1203,6 +1209,7 @@ body {
     width: 100% !important;
     height: auto !important;
     display: block !important;
+    margin-bottom: 0 !important;
   }
 
   /* Mobile Hamburger Toggle Button */
@@ -1809,6 +1816,7 @@ body {
     width: 100% !important;
     height: auto !important;
     display: block !important;
+    margin-bottom: 0 !important;
   }
   .footer-logo {
     width: 230px !important;
