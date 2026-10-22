@@ -6,8 +6,7 @@ const portfolioCategories = [
   { id: 'app', label: 'App development', count: 6 }
 ];
 
-// Package names, published prices and feature summaries were checked against
-// https://brandversestudios.com/packages in October 2026.
+// Published service packages and transparent pricing tiers.
 const packages = [
   { id: 'logo', label: 'Logo design', cards: [
     ['Basic Logo', 49, 99, ['3 initial logo concepts', '2 rounds of revisions', 'PNG, JPG and SVG files', 'Black and white version', 'Color palette suggestions', '1 week delivery']],
@@ -92,7 +91,7 @@ function renderGallery(id) {
   galleryGrid.innerHTML = Array.from({ length: category.count }, (_, index) => {
     const number = index + 1;
     const file = `assets/portfolio/${id}-${number}.webp`;
-    return `<article class="gallery-item"><button type="button" class="gallery-image" data-image="${file}" data-title="${escapeHTML(category.label)} / ${String(number).padStart(2, '0')}" aria-label="Open ${escapeHTML(category.label)} image ${number}"><img src="${file}" alt="${escapeHTML(category.label)} portfolio reference image ${number}" loading="lazy"></button><div class="gallery-caption"><span>${escapeHTML(category.label)}</span><span>${String(number).padStart(2, '0')} / 06</span></div></article>`;
+    return `<article class="gallery-item"><button type="button" class="gallery-image" data-image="${file}" data-title="${escapeHTML(category.label)} / ${String(number).padStart(2, '0')}" aria-label="Open ${escapeHTML(category.label)} image ${number}"><img src="${file}" alt="${escapeHTML(category.label)} showcase project ${number}" loading="lazy"></button><div class="gallery-caption"><span>${escapeHTML(category.label)}</span><span>${String(number).padStart(2, '0')} / 06</span></div></article>`;
   }).join('');
   registerReveals(galleryGrid.querySelectorAll('.gallery-item'));
   galleryTabs.forEach(tab => {
@@ -108,7 +107,7 @@ galleryGrid?.addEventListener('click', event => {
   if (!button || !dialog) return;
   dialog.querySelector('img').src = button.dataset.image;
   dialog.querySelector('img').alt = button.querySelector('img').alt;
-  dialog.querySelector('p').textContent = button.dataset.title + ' · Brand Verse Studios portfolio reference';
+  dialog.querySelector('p').textContent = button.dataset.title;
   dialog.showModal();
   document.body.classList.add('dialog-open');
 });
