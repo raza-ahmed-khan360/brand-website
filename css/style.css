@@ -1086,3 +1086,75 @@ body {
 .form-field {
   margin-bottom: 24px;
 }
+
+
+/* ==========================================================================
+   PRICING CARDS DARK CONTRAST HOVER EFFECT
+   Smoothly morphs to rich navy background with high contrast white & sky blue
+   ========================================================================== */
+
+.price-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid #cbd2da;
+  transition: background-color 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.price-card h3,
+.price-card strong,
+.price-card del,
+.price-card li,
+.price-card li:before,
+.price-card .price-card-index,
+.price-card .price-card-more,
+.price-card .price-line {
+  transition: color 0.28s ease, border-color 0.28s ease !important;
+}
+
+/* Hover State: Bold Dark Navy Contrast */
+.price-card:hover,
+.motion-ready .price-card.reveal.is-visible:hover {
+  background: var(--navy) !important;
+  border-color: #2a4365 !important;
+  transform: translateY(-8px) scale(1.015) !important;
+  box-shadow: 0 28px 56px -12px rgba(13, 30, 57, 0.48),
+              0 12px 24px -6px rgba(24, 124, 192, 0.25),
+              0 0 0 1px rgba(66, 185, 235, 0.3) !important;
+  z-index: 2;
+}
+
+.price-card:hover .price-card-index {
+  color: var(--sky) !important;
+}
+
+.price-card:hover h3 {
+  color: #ffffff !important;
+}
+
+.price-card:hover .price-line {
+  border-bottom-color: #273e5c !important;
+}
+
+.price-card:hover .price-line strong {
+  color: #ffffff !important;
+}
+
+.price-card:hover .price-line del {
+  color: #8da4bb !important;
+}
+
+.price-card:hover li {
+  color: #dce6f0 !important;
+}
+
+.price-card:hover li:before {
+  color: var(--sky) !important;
+}
+
+.price-card:hover .price-card-more {
+  color: var(--sky) !important;
+  border-bottom-color: var(--sky) !important;
+}

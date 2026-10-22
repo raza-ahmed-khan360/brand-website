@@ -154,7 +154,7 @@ if (inquiryForm && formAccessKey && formSubmit && formStatus) {
   const formEnabled = Boolean(formAccessKey.value.trim());
   formSubmit.disabled = !formEnabled;
   if (formEnabled) {
-    document.querySelector('#form-availability').textContent = 'Tell us about your project and we’ll get back to you by email.';
+    const formAvail = document.querySelector('#form-availability'); if (formAvail) formAvail.textContent = 'Tell us about your project and we will get back to you by email.';
     formStatus.textContent = 'Ready to send';
   }
   inquiryForm.addEventListener('submit', async event => {
@@ -162,7 +162,7 @@ if (inquiryForm && formAccessKey && formSubmit && formStatus) {
     if (!formAccessKey.value.trim()) return;
 
     formSubmit.disabled = true;
-    formStatus.textContent = 'Sending your enquiry…';
+    formStatus.textContent = 'Sending your enquiry...';
     delete formStatus.dataset.state;
     try {
       const response = await fetch(inquiryForm.action, {
@@ -201,7 +201,7 @@ function showHeroSlide(index) {
     if (active) dot.setAttribute('aria-current', 'true');
     else dot.removeAttribute('aria-current');
   });
-  document.querySelector('#hero-slide-count').textContent = `${String(activeHeroSlide + 1).padStart(2, '0')} / ${String(heroSlides.length).padStart(2, '0')}`;
+  const slideCountEl = document.querySelector('#hero-slide-count'); if (slideCountEl) slideCountEl.textContent = `${String(activeHeroSlide + 1).padStart(2, '0')} / ${String(heroSlides.length).padStart(2, '0')}`;
 }
 heroSlider?.addEventListener('click', event => {
   const button = event.target.closest('button[data-slide], button[data-slide-direction]');
@@ -259,3 +259,18 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
     if (!wasOpen) row.classList.add('is-open');
   });
 });
+
+
+function ensureInitialContent() {
+  if (galleryGrid && (!galleryGrid.children || galleryGrid.children.length === 0)) {
+    renderGallery('web');
+  }
+  if (pricingGrid && pricingTabs && (!pricingGrid.children || pricingGrid.children.length === 0)) {
+    renderPricing('logo');
+  }
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', ensureInitialContent);
+} else {
+  ensureInitialContent();
+}
