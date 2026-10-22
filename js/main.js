@@ -14,7 +14,7 @@ const packages = [
     ['Premium Logo', 125, 249, ['5 initial logo concepts', 'Unlimited revisions', 'All file formats', 'Horizontal, vertical and icon variations', 'Brand guidelines', 'Business card design']],
     ['Enterprise Logo', 249, 499, ['8 initial logo concepts', 'Unlimited revisions', 'Complete logo system', 'Full brand identity package', 'Comprehensive brand guidelines', 'Social media kit']],
     ['3D Logo Package', 499, 749, ['3 unique 3D concepts', 'Lighting effects and VFX', 'Fully rendered logo', 'Multiple viewing angles', '3 dedicated designers', '72-hour turnaround']],
-    ['MascotPro Package', 399, 649, ['2 mascot concepts', 'Hand-drawn sketch', 'Unlimited revisions', 'Presentation mockup', 'AI, EPS, PNG, JPEG and PDF files', '24–48 hour turnaround']],
+    ['MascotPro Package', 399, 649, ['2 mascot concepts', 'Hand-drawn sketch', 'Unlimited revisions', 'Presentation mockup', 'AI, EPS, PNG, JPEG and PDF files', '24 to 48 hour turnaround']],
     ['BrandMaster Package', 999, 1499, ['Unlimited original concepts', '5-page informative website', 'Stationery design', 'Brand book', '500 business cards', 'Social media designs']]
   ]},
   { id: 'website', label: 'Website development', cards: [
@@ -39,13 +39,13 @@ const packages = [
     ['SEO Enterprise', 2299, 2999, ['Comprehensive SEO audit', 'Strategy for 100+ keywords', 'Technical overhaul', 'Content strategy', 'Advanced link building', 'Competitor analysis']]
   ]},
   { id: 'revamp', label: 'Website revamp', cards: [
-    ['Website Refresh', 749, 999, ['Homepage plus 3-page refresh', 'Mobile optimization', 'Performance improvements', 'Content updates', '1 revision round', '2–3 week delivery']],
+    ['Website Refresh', 749, 999, ['Homepage plus 3-page refresh', 'Mobile optimization', 'Performance improvements', 'Content updates', '1 revision round', '2 to 3 week delivery']],
     ['Complete Revamp', 2299, 2999, ['Complete redesign', 'Responsive design', 'Performance optimization', 'SEO improvements', 'Content restructuring', '3 months of support']],
     ['Enterprise Revamp', 5499, 6999, ['Full website redesign', 'Custom web application', 'Advanced integrations', 'Complete SEO overhaul', 'User experience optimization', '6 months of support']]
   ]},
   { id: 'video', label: 'Video production', cards: [
-    ['Video Starter', 599, 799, ['1 video up to 60 seconds', 'Basic editing', 'Music and sound effects', '1 revision round', 'HD delivery', '2–3 week delivery']],
-    ['Video Professional', 1899, 2499, ['2–3 videos up to 2 minutes each', 'Professional editing', 'Motion graphics', 'Color grading', 'Voiceover', 'Multiple formats']],
+    ['Video Starter', 599, 799, ['1 video up to 60 seconds', 'Basic editing', 'Music and sound effects', '1 revision round', 'HD delivery', '2 to 3 week delivery']],
+    ['Video Professional', 1899, 2499, ['2 to 3 videos up to 2 minutes each', 'Professional editing', 'Motion graphics', 'Color grading', 'Voiceover', 'Multiple formats']],
     ['Video Enterprise', 4499, 5999, ['5+ videos', 'Cinematic production', 'Advanced motion graphics', 'Custom music', 'Multi-language versions', 'Complete video strategy']]
   ]},
   { id: 'mobile', label: 'Mobile application', cards: [
@@ -118,12 +118,16 @@ dialog?.addEventListener('close', () => document.body.classList.remove('dialog-o
 
 const pricingTabs = document.querySelector('#pricing-tabs');
 const pricingGrid = document.querySelector('#pricing-grid');
-pricingTabs.innerHTML = packages.map(item => `<button type="button" class="price-tab" data-package="${item.id}" aria-selected="false">${escapeHTML(item.label)}</button>`).join('');
+if (pricingTabs && pricingGrid) {
+  pricingTabs.innerHTML = packages.map(item => `<button type="button" class="price-tab" data-package="${item.id}" aria-selected="false">${escapeHTML(item.label)}</button>`).join('');
+}
 function renderPricing(id) {
   const category = packages.find(item => item.id === id);
-  if (!category) return;
-  document.querySelector('#pricing-heading').textContent = category.label;
-  document.querySelector('#pricing-count').textContent = String(category.cards.length).padStart(2, '0') + ' PACKAGES';
+  if (!category || !pricingGrid || !pricingTabs) return;
+  const heading = document.querySelector('#pricing-heading');
+  const count = document.querySelector('#pricing-count');
+  if (heading) heading.textContent = category.label;
+  if (count) count.textContent = String(category.cards.length).padStart(2, '0') + ' PACKAGES';
   pricingGrid.innerHTML = category.cards.map(([name, price, oldPrice, features], index) => `<article class="price-card"><div class="price-card-top"><span class="price-card-index">PACKAGE / ${String(index + 1).padStart(2, '0')}</span><span class="price-card-index">${escapeHTML(category.label.toUpperCase())}</span></div><h3>${escapeHTML(name)}</h3><div class="price-line"><strong>${formatPrice(price)}</strong><del>${formatPrice(oldPrice)}</del></div><ul>${features.map(feature => `<li>${escapeHTML(feature)}</li>`).join('')}</ul><a class="price-card-more" href="#contact" data-inquiry-service="${category.id}" data-inquiry-package="${escapeHTML(name)}">ASK ABOUT THIS PACKAGE ↗</a></article>`).join('');
   registerReveals(pricingGrid.querySelectorAll('.price-card'));
   pricingTabs.querySelectorAll('.price-tab').forEach(tab => {
@@ -132,11 +136,11 @@ function renderPricing(id) {
     tab.setAttribute('aria-selected', String(selected));
   });
 }
-pricingTabs.addEventListener('click', event => {
+pricingTabs?.addEventListener('click', event => {
   const tab = event.target.closest('.price-tab');
   if (tab) renderPricing(tab.dataset.package);
 });
-pricingGrid.addEventListener('click', event => {
+pricingGrid?.addEventListener('click', event => {
   const link = event.target.closest('[data-inquiry-package]');
   if (!link) return;
   document.querySelector('#inquiry-service').value = link.dataset.inquiryService;
@@ -169,7 +173,7 @@ if (inquiryForm && formAccessKey && formSubmit && formStatus) {
       const result = await response.json();
       if (!response.ok || !result.success) throw new Error('Submission failed');
       inquiryForm.reset();
-      formStatus.textContent = 'Thanks — your enquiry has been sent.';
+      formStatus.textContent = 'Thanks - your enquiry has been sent.';
       formStatus.dataset.state = 'success';
     } catch {
       formStatus.textContent = 'Could not send right now. Please try again.';
@@ -237,11 +241,21 @@ menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () =>
   menuButton.setAttribute('aria-expanded', 'false');
 }));
 
-document.querySelector('#year').textContent = new Date().getFullYear();
+const yearEl = document.querySelector('#year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 if (revealObserver) {
   document.documentElement.classList.add('motion-ready');
   registerReveals(document.querySelectorAll('.statement-inner > *, .services > div, .section-intro > *, .interlude .container > *, .pricing-meta, .process-inner > *, .process-list > div, .closing .container > *'));
   requestAnimationFrame(() => document.documentElement.classList.add('intro-visible'));
 }
-renderGallery('web');
-renderPricing('logo');
+if (galleryGrid) renderGallery('web');
+if (pricingGrid && pricingTabs) renderPricing('logo');
+
+document.querySelectorAll('.faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const row = btn.closest('.faq-row');
+    if (!row) return;
+    const wasOpen = row.classList.contains('is-open');
+    document.querySelectorAll('.faq-row').forEach(r => r.classList.remove('is-open'));
+    if (!wasOpen) row.classList.add('is-open');
+  });
+});
