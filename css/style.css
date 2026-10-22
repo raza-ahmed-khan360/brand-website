@@ -17,7 +17,7 @@ img{display:block;max-width:100%}
 .topline a{text-decoration:none;transition:color .2s ease}
 .topline a:hover,.topline a:focus-visible{color:#fff}
 .nav{height:100px;display:flex;align-items:center;justify-content:space-between;gap:36px}
-.brand{width:250px;display:flex;align-items:center;flex:none}
+.brand{width:275px;display:flex;align-items:center;flex:none}
 .brand img{width:100%;height:auto;display:block}
 .nav-links{display:flex;align-items:center;gap:28px}
 .nav-links>a:not(.nav-action){font-size:13.5px;font-weight:600;text-decoration:none;color:var(--navy);letter-spacing:-.01em;position:relative;padding:10px 0;display:inline-flex;align-items:center;line-height:1.2;transition:color .2s ease}
@@ -876,7 +876,7 @@ body {
 }
 
 .brand {
-  width: 250px;
+  width: 275px;
   display: flex;
   align-items: center;
   flex: none;
@@ -985,7 +985,7 @@ body {
     gap: 20px;
   }
   .brand {
-    width: 210px;
+    width: 235px;
   }
   .nav-links {
     gap: 18px;
